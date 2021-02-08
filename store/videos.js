@@ -1,14 +1,18 @@
 export const state = () => ({
-  currentVideo: null,
+  videoId: null,
   content: [],
+  comments: [],
 })
 
 export const mutations = {
-  SET_CURRENT_VIDEO(state, data) {
-    state.currentVideo = data
+  SET_VIDEO_ID(state, data) {
+    state.videoId = data
   },
   SET_CONTENT(state, data) {
     state.content = data
+  },
+  SET_COMMENTS(state, data) {
+    state.comments = data
   },
   UPDATE_VIDEO_PROGRESS(state, data) {
     const index = state.content.findIndex((e) => e.id === data.id)
@@ -16,6 +20,12 @@ export const mutations = {
     if (index) {
       state.content[index].progress = data.progress
     }
+  },
+}
+
+export const getters = {
+  video: (state) => {
+    return state.content.find((e) => e.id === state.videoId)
   },
 }
 
@@ -34,7 +44,7 @@ export const actions = {
             })
 
             commit('SET_CONTENT', videos)
-            commit('SET_CURRENT_VIDEO', videos[0])
+            commit('SET_VIDEO_ID', videos[0].id)
 
             resolve(videos)
           }
@@ -42,8 +52,21 @@ export const actions = {
         .catch((error) => reject(error))
     })
   },
-  setCurrentVideo({ commit }, data) {
-    commit('SET_CURRENT_VIDEO', data)
+  getComments({ commit }, { id }) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post(`/api/content/${id}/comments`)
+        .then((response) => {
+          if (response.status === 200) {
+            commit('SET_COMMENTS', response.data.comments)
+            resolve(response.data.comments)
+          }
+        })
+        .catch((error) => reject(error))
+    })
+  },
+  setVideoId({ commit }, data) {
+    commit('SET_VIDEO_ID', data)
   },
   updateVideoProgress({ commit }, data) {
     return new Promise((resolve, reject) => {

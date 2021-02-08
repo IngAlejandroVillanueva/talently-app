@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$store.dispatch('videos/setCurrentVideo', this.video)
+      this.$store.dispatch('videos/setVideoId', this.video.id)
     },
   },
 }

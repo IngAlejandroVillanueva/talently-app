@@ -22,6 +22,7 @@ export default {
   },
   async asyncData({ store }) {
     await store.dispatch('videos/getContent')
+    await store.dispatch('videos/getComments', { id: 1 })
   },
 }
 </script>

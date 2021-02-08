@@ -2,20 +2,20 @@
   <el-card shadow="never" class="video-player-card">
     <template slot="header" class="clearfix">
       <VideoPlayer
-        :id="currentVideo.id"
-        :progress="currentVideo.progress"
-        :vimeo-id="currentVideo.vimeo_id"
+        :id="video.id"
+        :progress="video.progress"
+        :vimeo-id="video.vimeo_id"
       />
     </template>
 
-    <h2>{{ currentVideo.title }}</h2>
+    <h2>{{ video.title }}</h2>
 
-    <Excerpt :text="currentVideo.article" />
+    <Excerpt :text="video.article" />
   </el-card>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import Excerpt from '@/components/Excerpt'
 import VideoPlayer from './VideoPlayer'
 
@@ -26,7 +26,7 @@ export default {
     Excerpt,
   },
   computed: {
-    ...mapState('videos', ['currentVideo']),
+    ...mapGetters('videos', ['video']),
   },
 }
 </script>

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import RegisterForm from '@/components/RegisterForm'
+import RegisterForm from '@/components/forms/Register'
 
 export default {
   name: 'RegisterPage',
