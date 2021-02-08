@@ -1,5 +1,5 @@
 <template>
-  <el-card class="comments-list-item">
+  <el-card class="comments-list-item" shadow="never">
     <el-avatar :size="40" :src="require('@/assets/img/default-avatar.png')" />
 
     <div>
