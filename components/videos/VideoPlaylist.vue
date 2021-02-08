@@ -1,6 +1,6 @@
 <template>
   <el-card class="video-playlist">
-    <template slot="header" class="clearfix">
+    <template slot="header">
       <h3>Contenido</h3>
     </template>
 

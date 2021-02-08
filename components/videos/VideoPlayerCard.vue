@@ -1,6 +1,6 @@
 <template>
   <el-card shadow="never" class="video-player-card">
-    <template slot="header" class="clearfix">
+    <template slot="header">
       <VideoPlayer
         :id="video.id"
         :progress="video.progress"

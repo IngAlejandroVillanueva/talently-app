@@ -52,12 +52,13 @@ export const actions = {
         .catch((error) => reject(error))
     })
   },
-  getComments({ commit }, { id }) {
+  getComments({ commit }, videoId) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .post(`/api/content/${id}/comments`)
+        .post(`/api/content/${videoId}/comments`)
         .then((response) => {
           if (response.status === 200) {
+            console.log(response.data.comments)
             commit('SET_COMMENTS', response.data.comments)
             resolve(response.data.comments)
           }

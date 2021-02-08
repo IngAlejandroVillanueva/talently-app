@@ -35,6 +35,7 @@ export default {
   methods: {
     handleClick() {
       this.$store.dispatch('videos/setVideoId', this.video.id)
+      this.$store.dispatch('videos/getComments', this.video.id)
     },
   },
 }
