@@ -5,6 +5,8 @@
         ref="vimeoPlayer"
         :video-id="vimeoId"
         @progress="handleProgress"
+        @ready="setVideoDuration"
+        @ended="handleProgress"
       />
     </client-only>
   </div>
@@ -27,12 +29,19 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      videoDuration: 0,
+    }
+  },
   methods: {
+    async setVideoDuration() {
+      this.videoDuration = await this.$refs.vimeoPlayer.player.getDuration()
+    },
     async handleProgress() {
       const time = await this.$refs.vimeoPlayer.player.getCurrentTime()
-      const duration = await this.$refs.vimeoPlayer.player.getDuration()
 
-      const progress = time / duration
+      const progress = parseInt((time / this.videoDuration) * 100)
 
       if (progress > this.progress) {
         const payload = { id: this.id, progress }

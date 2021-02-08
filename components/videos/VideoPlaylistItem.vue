@@ -14,7 +14,7 @@
 
     <el-progress
       type="circle"
-      :percentage="video.progress * 100"
+      :percentage="video.progress"
       :show-text="false"
       :width="30"
       :stroke-width="4"
